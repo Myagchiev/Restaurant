@@ -3,15 +3,13 @@ import { createAboutSection } from './about.js';
 import { createContactSection } from './contact.js';
 
 
-// Функция для переключения секций
+// функция для переключения секций
 export function showSection(targetId) {
-  // Скрыть все секции
   const sections = document.querySelectorAll('section');
   sections.forEach(section => {
     section.style.display = 'none';
   });
 
-  // Показать нужную секцию
   const targetSection = document.getElementById(targetId);
   if (targetSection) {
     targetSection.style.display = 'block';
@@ -23,21 +21,19 @@ export function setUpMenu() {
   const menuItems = document.querySelectorAll('.navbar ul li');
 
   menuItems.forEach((item, index) => {
-    // Пропускаем 6 и 7 элементы (иконки и кнопки), добавляем обработчик на логотип
     if (index === 5 || index === 6) {
-      return; // Пропускаем добавление обработчика на эти элементы
+      return;
     }
 
-    // Обработчик для логотипа на нулевом индексе
     if (index === 0) {
       item.addEventListener('click', () => {
-        showSection('home');  // Переходим на секцию Home
+        showSection('home');
       });
-      return;  // Выход из функции для нулевого индекса, чтобы не добавлять другой обработчик
+      return;
     }
 
     item.addEventListener('click', (event) => {
-      const targetId = event.target.textContent.toLowerCase().replace(/\s+/g, '-'); // Преобразуем текст в id секции
+      const targetId = event.target.textContent.toLowerCase().replace(/\s+/g, '-');
 
       if (targetId === 'about-us') {
         const existingAboutSection = document.getElementById('about');
@@ -46,21 +42,21 @@ export function setUpMenu() {
         }
         createAboutSection();
         showSection('about');
-      } else if (targetId === 'contact-us') {  // Добавляем условие для Contact Us
+      } else if (targetId === 'contact-us') {
         const existingContactSection = document.getElementById('contact');
         if (existingContactSection) {
           existingContactSection.remove();
         }
-        createContactSection();  // Добавляем секцию Contact Us
-        showSection('contact');  // Показать Contact Us
+        createContactSection();
+        showSection('contact');
       } else {
-        showSection(targetId);  // Для остальных пунктов переключаем обычные секции
+        showSection(targetId);
       }
     });
   });
 }
 
-// Класс для создания карточки категории
+// класс для создания карточки
 class CategoryCard {
   constructor(img, title, desc) {
     this.img = img;
@@ -92,7 +88,7 @@ class CategoryCard {
   }
 }
 
-// Класс для создания карточки товара
+// класс для создания большой карточки
 class ItemCard {
   constructor(heart, img, title, description, price, rating) {
     this.heart = heart;
@@ -151,24 +147,21 @@ import foodFive from '../assets/images/Fattoush salad.png';
 import foodSix from '../assets/images/Vegetable salad.png';
 import foodSeven from '../assets/images/Egg salad.png';
 
-// Функция для создания меню
+// функция для создания меню
 export function createMenu() {
   // Создание секции menu
   const menuSection = document.createElement('section');
   menuSection.id = 'menu';
   menuSection.style.display = 'none';
 
-  // Создание контейнера внутри секции
   const container = document.createElement('div');
   container.classList.add('container');
   menuSection.appendChild(container);
 
-  // Создание родительского блока
   const parentDiv = document.createElement('div');
   parentDiv.classList.add('parent');
   container.appendChild(parentDiv);
 
-  // Создание первого блока с заголовками
   const div1 = document.createElement('div');
   div1.classList.add('div1');
   parentDiv.appendChild(div1);
@@ -180,7 +173,6 @@ export function createMenu() {
       <p class="redtitle">Customer Favorites</p>
   `;
 
-  // Массив категорий
   const categories = [
     new CategoryCard(`${foodOne}`, 'Main Dish', '(86 dishes)'),
     new CategoryCard(`${foodTwo}`, 'Break Fast', '(12 break fast)'),
@@ -188,23 +180,19 @@ export function createMenu() {
     new CategoryCard(`${foodFour}`, 'Browse All', '(255 Items)')
   ];
 
-  // Добавление карточек категорий в родительский блок
   categories.forEach(category => {
     parentDiv.appendChild(category.createCard());
   });
 
-  // Массив товаров
   const items = [
     new ItemCard('&#10084;', `${foodFive}`, 'Fattoush salad', 'Description of the item', '$24.00', '4.6'),
     new ItemCard('&#9825;', `${foodSix}`, 'Vegetable salad', 'Description of the item', '$26.00', '4.5'),
     new ItemCard('&#9825;', `${foodSeven}`, 'Egg vegi salad', 'Description of the item', '$23.00', '4.9')
   ];
 
-  // Добавление карточек товаров в родительский блок
   items.forEach(item => {
     parentDiv.appendChild(item.createCard());
   });
 
-  // Вставка секции в DOM
   document.body.appendChild(menuSection);
 }

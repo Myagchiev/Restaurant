@@ -5,38 +5,33 @@ import footerGroup from '../assets/images/footerGroup.png';
 
 // Функция для создания секции Contact
 export function createContactSection() {
-  // Создаем секцию с id "contact"
   const section = document.createElement('section');
   section.id = 'contact';
 
-  // Создаем контейнер для секции
+  // контейнер для секции
   const container = document.createElement('div');
   container.classList.add('container');
 
-  // --- Контактная форма ---
+  // форма связи
   const contactFormDiv = document.createElement('div');
   contactFormDiv.classList.add('contact-form');
 
-  // Заголовок формы
   const formHeading = document.createElement('h2');
   formHeading.textContent = 'Contact Us';
   contactFormDiv.appendChild(formHeading);
 
-  // Создаем форму
+  // форма
   const form = document.createElement('form');
   form.id = 'contact-form';
   form.action = '#';
   form.method = 'POST';
-  form.onsubmit = (event) => handleSubmit(event); // Обработчик отправки формы
+  form.onsubmit = (event) => handleSubmit(event);
 
-  // Поле ввода для имени
   const nameDiv = createInputField('Name', 'text', 'name');
-  // Поле ввода для email
   const emailDiv = createInputField('Email', 'email', 'email');
-  // Поле ввода для телефона
   const phoneDiv = createInputField('Phone', 'tel', 'phone');
 
-  // Кнопка отправки формы
+  // отправка формы
   const submitDiv = document.createElement('div');
   submitDiv.classList.add('form-group');
   const submitButton = document.createElement('input');
@@ -44,16 +39,16 @@ export function createContactSection() {
   submitButton.value = 'SEND';
   submitDiv.appendChild(submitButton);
 
-  // Добавляем все элементы в форму
+  // добавление всех элементов в форму
   form.appendChild(nameDiv);
   form.appendChild(emailDiv);
   form.appendChild(phoneDiv);
   form.appendChild(submitDiv);
 
-  // Добавляем форму в контейнер
+  // добавление формы в контейнер
   contactFormDiv.appendChild(form);
 
-  // --- Раздел с местоположением ---
+  // местоположение
   const locationDiv = document.createElement('div');
   const locationHeading = document.createElement('h2');
   locationHeading.textContent = 'Our Location:';
@@ -63,7 +58,7 @@ export function createContactSection() {
   locationText.textContent = '123 Bridge Street, Nowhere Land, LA 12345 United States';
   locationDiv.appendChild(locationText);
 
-  // Вставляем карту (iframe)
+  // карта (iframe)
   const iframe = document.createElement('iframe');
   iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5804.1881478432415!2d45.676380992311294!3d43.3332204768686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4051d3d50e715cd3%3A0x6bc77145485ca1f9!2z0KDQtdGB0YLQvtGA0LDQvSAiUGFyYWRpc2Ui!5e0!3m2!1sru!2sru!4v1738763408932!5m2!1sru!2sru";
   iframe.width = "600";
@@ -74,40 +69,34 @@ export function createContactSection() {
   iframe.referrerpolicy = "no-referrer-when-downgrade";
   locationDiv.appendChild(iframe);
 
-  // --- Футер ---
+  // футер
   const footerDiv = document.createElement('div');
   footerDiv.classList.add('footer');
 
-  // Левая часть футера (с мини-логотипом и текстом)
   const leftboxDiv = createFooterLeftBox();
 
-  // Правая часть футера с полезными ссылками
   const rightboxDiv = createFooterRightBox();
 
-  // Добавляем все части футера в футер
   footerDiv.appendChild(leftboxDiv);
   footerDiv.appendChild(rightboxDiv);
 
-  // --- Сборка страницы ---
   container.appendChild(contactFormDiv);
   container.appendChild(locationDiv);
   container.appendChild(footerDiv);
 
-  // Добавляем контейнер в секцию
   section.appendChild(container);
 
-  // Добавляем секцию на страницу
   document.body.appendChild(section);
 }
 
-// Обработчик отправки формы
+// обработчик отправки формы
 function handleSubmit(event) {
   event.preventDefault();
   alert("Форма отправлена!");
   document.getElementById("contact-form").reset();
 }
 
-// Функция для создания поля ввода (с меткой)
+// функция для создания поля ввода
 function createInputField(labelText, inputType, inputName) {
   const div = document.createElement('div');
   div.classList.add('form-group');
@@ -128,7 +117,7 @@ function createInputField(labelText, inputType, inputName) {
   return div;
 }
 
-// Функция для создания левой части футера
+// создание левой части футера
 function createFooterLeftBox() {
   const leftboxDiv = document.createElement('div');
   leftboxDiv.classList.add('leftbox');
@@ -150,12 +139,11 @@ function createFooterLeftBox() {
   return leftboxDiv;
 }
 
-// Функция для создания правой части футера
+// создание правой части футера
 function createFooterRightBox() {
   const rightboxDiv = document.createElement('div');
   rightboxDiv.classList.add('rightbox');
 
-  // Ссылки в футере
   const usefulLinksUl = createFooterList(['About us', 'Blogs', 'FAQ'], 'Useful links');
   const mainMenuUl = createFooterList(['Home', 'Offers', 'Reservation'], 'Main Menu');
   const contactUsUl = createFooterList(['example@email.com', '+64 958 248 966', 'Social media'], 'Contact Us');
@@ -171,7 +159,7 @@ function createFooterRightBox() {
   return rightboxDiv;
 }
 
-// Функция для создания списка с заголовком
+// функция для создания списка с заголовком
 function createFooterList(items, heading) {
   const ul = document.createElement('ul');
   ul.innerHTML = `<li><h2>${heading}</h2></li>`;

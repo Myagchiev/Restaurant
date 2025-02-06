@@ -12,13 +12,9 @@ import starFilledSrc from '../assets/images/fi-sr-star.png';
 import starEmptySrc from '../assets/images/fi-br-star.png';
 import playVideo from '../assets/images/Group 22.png';
 
-// В файле, где обрабатывается логика авторизации (например, header.js)
-import { showSection } from './tabs.js';  // Путь к файлу, где была определена функция showSection
+import { showSection } from './tabs.js';
 
-// Теперь вы можете использовать showSection
-
-
-// Функция для создания шапки
+// функция для создания шапки
 export function createHeader() {
   const header = document.createElement('header');
     const container = document.createElement('div');
@@ -29,7 +25,7 @@ export function createHeader() {
     
     const ul = document.createElement('ul');
     
-    // Создаём li для логотипа
+    // li для логотипа
     const logoLi = document.createElement('li');
     const logoImg = document.createElement('img');
     logoImg.src = logoImgSrc;
@@ -37,7 +33,7 @@ export function createHeader() {
     logoLi.appendChild(logoImg);
     logoLi.id = 'home1';
     
-    // Создаём остальные li для элементов меню
+    // li для элементов меню
     const menuItems = ['Home', 'Menu', 'About Us', 'Contact Us'];
     const menuLis = menuItems.map(item => {
       const li = document.createElement('li');
@@ -63,9 +59,8 @@ export function createHeader() {
     signUpButton.textContent = 'Log in';
     signUpLi.appendChild(signUpButton);
     
-    // Добавляем все элементы в ul
-    ul.appendChild(logoLi);  // Логотип первым
-    ul.append(...menuLis);   // Меню
+    ul.appendChild(logoLi);
+    ul.append(...menuLis); 
     ul.appendChild(iconLi1);
     ul.appendChild(iconLi2);
     ul.appendChild(signUpLi);
@@ -75,18 +70,16 @@ export function createHeader() {
     header.appendChild(container);
     document.getElementById('content').appendChild(header);
 
-// Модальное окно для логина
+// модальное окно для логина
 const modal = document.createElement('div');
 modal.id = 'loginModal';
 modal.classList.add('modal');
 
-// Стиль для модального окна сразу видимым
-modal.style.display = 'block'; // Показываем модальное окно сразу при загрузке
+modal.style.display = 'block';
 
 const modalContent = document.createElement('div');
 modalContent.classList.add('modal-content');
 
-// Убираем кнопку закрытия "×"
 const form = document.createElement('form');
 
 const usernameLabel = document.createElement('label');
@@ -117,38 +110,33 @@ modalContent.appendChild(form);
 modal.appendChild(modalContent);
 document.body.appendChild(modal);
 
-// Блокируем прокрутку страницы при открытом модальном окне
 document.body.style.overflow = 'hidden';
 
-// Функция логина
+// функция логина
 form.addEventListener('submit', (event) => {
   event.preventDefault();
 
   const username = usernameInput.value;
   const password = passwordInput.value;
 
-  // В данном случае просто проверка на не пустые значения
   if (username && password) {
-    signUpButton.textContent = 'Log out'; // Меняем текст на кнопке
-    signUpButton.style.backgroundColor = 'red'; // Меняем цвет кнопки
+    signUpButton.textContent = 'Log out';
+    signUpButton.style.backgroundColor = 'red';
 
-    // Переходим на главную секцию после логина
     showSection('home');
   }
 
-  // Закрываем модальное окно после успешного логина
   modal.style.display = 'none';
-  document.body.style.overflow = 'auto'; // Включаем прокрутку страницы обратно
+  document.body.style.overflow = 'auto';
 });
 
-// Обработчик для кнопки "Log out"
+// обработчик для кнопки "Log out"
 signUpButton.addEventListener('click', () => {
   if (signUpButton.textContent === 'Log out') {
-    // Когда нажимается "Log out", показываем окно входа снова
     modal.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Блокируем прокрутку страницы при открытом окне
-    signUpButton.textContent = 'Log in'; // Меняем текст кнопки на "Log in"
-    signUpButton.style.backgroundColor = ''; // Сбрасываем цвет кнопки (если нужно)
+    document.body.style.overflow = 'hidden';
+    signUpButton.textContent = 'Log in';
+    signUpButton.style.backgroundColor = '';
   }
 });
 
@@ -156,7 +144,7 @@ signUpButton.addEventListener('click', () => {
 
 }
 
-// Функция для создания основной секции
+// функция для создания секции home
 export function createMain() {
     const main = document.createElement('main');
   const section = document.createElement('section');
@@ -239,18 +227,16 @@ export function createMain() {
     const p = document.createElement('p');
     p.textContent = title;
     
-    // Создаем 5 звезд
     const starsDiv = document.createElement('div');
     starsDiv.classList.add('starsDiv');
     
     for (let i = 0; i < 5; i++) {
       const starImg = document.createElement('img');
       
-      // Заполняем звезды в зависимости от starsCount
       if (i < starsCount) {
-        starImg.src = starFilledSrc; // Заполненная звезда
+        starImg.src = starFilledSrc;
       } else {
-        starImg.src = starEmptySrc; // Пустая звезда
+        starImg.src = starEmptySrc;
       }
       
       starImg.alt = 'star';
@@ -261,7 +247,7 @@ export function createMain() {
     priceP.textContent = price;
     
     div.appendChild(p);
-    div.appendChild(starsDiv);  // Добавляем блок с картинками звезд
+    div.appendChild(starsDiv);
     div.appendChild(priceP);
     
     minicard.appendChild(img);
@@ -270,20 +256,16 @@ export function createMain() {
     return minicard;
   }
   
-  // Пример добавления minicard
   const minicard1 = createMinicard(minicardImg1Src, 'Spicy noodles', ['$18.00', 5]);
   const minicard2 = createMinicard(minicardImg2Src, 'Vegetarian salad', ['$23.00', 4], true);
   
-  // Добавление minicard в контейнер two
   two.appendChild(minicard1);
   two.appendChild(minicard2);
   
-  // Добавляем контейнер two в основную секцию
   container.appendChild(one);
   container.appendChild(two);
   section.appendChild(container);
   main.appendChild(section);
   
-  // Добавляем основной контент в body
   document.getElementById('content').appendChild(main);
 }
