@@ -2,11 +2,6 @@
 import { createAboutSection } from './about.js';
 import { createContactSection } from './contact.js';
 
-// Функция для создания секций
-export function createSections() {
-  // Показать только первую секцию (Home)
-  showSection('home');
-}
 
 // Функция для переключения секций
 export function showSection(targetId) {
@@ -27,12 +22,24 @@ export function showSection(targetId) {
 export function setUpMenu() {
   const menuItems = document.querySelectorAll('.navbar ul li');
 
-  menuItems.forEach(item => {
+  menuItems.forEach((item, index) => {
+    // Пропускаем 6 и 7 элементы (иконки и кнопки), добавляем обработчик на логотип
+    if (index === 5 || index === 6) {
+      return; // Пропускаем добавление обработчика на эти элементы
+    }
+
+    // Обработчик для логотипа на нулевом индексе
+    if (index === 0) {
+      item.addEventListener('click', () => {
+        showSection('home');  // Переходим на секцию Home
+      });
+      return;  // Выход из функции для нулевого индекса, чтобы не добавлять другой обработчик
+    }
+
     item.addEventListener('click', (event) => {
       const targetId = event.target.textContent.toLowerCase().replace(/\s+/g, '-'); // Преобразуем текст в id секции
 
-
-        if (targetId === 'about-us') {
+      if (targetId === 'about-us') {
         const existingAboutSection = document.getElementById('about');
         if (existingAboutSection) {
           existingAboutSection.remove();
@@ -46,8 +53,7 @@ export function setUpMenu() {
         }
         createContactSection();  // Добавляем секцию Contact Us
         showSection('contact');  // Показать Contact Us
-      }
-      else {
+      } else {
         showSection(targetId);  // Для остальных пунктов переключаем обычные секции
       }
     });

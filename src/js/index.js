@@ -3,9 +3,10 @@
 import '../css/reset.css';
 import '../css/style.css';
 
+
 // Импортируем необходимые функции
 import { createHeader, createMain } from './content.js';
-import { createMenu, createSections, setUpMenu } from './tabs.js';
+import { createMenu, setUpMenu } from './tabs.js';
 
 
 // Создаем основной контент

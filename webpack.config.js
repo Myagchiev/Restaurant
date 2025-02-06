@@ -25,6 +25,14 @@ module.exports = (env, argv) => {
             'css-loader',
           ],
         },
+        {
+          test: /\.scss$/, // Обработка SCSS файлов
+          use: [
+            isProd ? MiniCssExtractPlugin.loader : 'style-loader', // В продакшн режим используем MiniCssExtractPlugin
+            'css-loader',  // Чтобы интерпретировать файлы .css
+            'sass-loader', // Для компиляции SCSS в CSS
+          ],
+        },
         // Правила для обработки изображений и иконок
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -75,4 +83,3 @@ module.exports = (env, argv) => {
     mode: isProd ? 'production' : 'development', // Устанавливаем режим сборки
   };
 };
-
